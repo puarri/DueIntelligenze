@@ -1,0 +1,460 @@
+<!doctype html>
+<!--
+  Processed file. Texts and snippets adapted from the original notebook
+  "Lezione1 - il programma.ipynb" (AI Scuola folder on Synology, read-only).
+  Colours and type mirror design/tokens.json; inlined so that this stays one downloadable file.
+-->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il cerchio della magia digitale</title>
+<style>
+:root {
+  --text: #37474F; --heading: #333333; --page: #F6F6F6; --grid: #CCCCCC; --muted: #6B7780; --white: #FFFFFF;
+  --green: #43A047; --blue: #1976D2; --orange: #FB8C00;
+  --green-bg: #C8E6C9; --blue-bg: #BBDEFB; --orange-bg: #FFE0B2;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--page); color: var(--text);
+  font: 16px/1.5 "Segoe UI", Roboto, Inter, system-ui, sans-serif;
+}
+main { max-width: 860px; margin: 0 auto; padding: 32px 16px 48px; }
+h1 { margin: 0 0 8px; color: var(--heading); font-size: 28px; font-weight: 600; line-height: 1.25; }
+h2 { margin: 0; color: var(--heading); font-size: 21px; font-weight: 600; }
+.lesson { margin: 0; color: var(--heading); font-size: 22px; font-weight: 600; line-height: 1.3; }
+p { margin: 8px 0 0; }
+#status { margin: 16px 0 0; padding: 10px 14px; border-radius: 4px; background: var(--white); font-size: 14px; }
+#status.error { background: var(--orange-bg); }
+#status[hidden] { display: none; }
+.snippet { margin-top: 24px; padding: 24px; border-radius: 4px; background: var(--white); border-left: 6px solid var(--accent); }
+.tag { display: inline-block; margin-bottom: 8px; padding: 2px 10px; border-radius: 4px; background: var(--tint); font-size: 13px; font-weight: 600; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+button {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px;
+  border: 1px solid var(--grid); border-radius: 4px; background: var(--white); color: var(--text);
+  font: inherit; font-size: 15px; cursor: pointer;
+}
+button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+button:hover:not(:disabled) { border-color: var(--text); }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button.primary { border-color: var(--text); background: var(--text); color: var(--white); }
+.code[hidden], .console[hidden], .ask[hidden], button[hidden] { display: none; }
+.code { margin-top: 12px; }
+textarea {
+  display: block; width: 100%; padding: 12px; border: 1px solid var(--grid); border-radius: 4px; resize: vertical;
+  background: var(--page); color: var(--heading); white-space: pre; overflow-x: auto;
+  font: 14px/1.5 Consolas, "Cascadia Mono", Menlo, monospace;
+}
+.hint { margin-top: 6px; color: var(--muted); font-size: 13px; }
+.console { margin-top: 12px; border-radius: 4px; background: var(--text); color: var(--white); }
+.console pre {
+  margin: 0; padding: 12px; min-height: 48px; max-height: 360px; overflow: auto;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+  font: 15px/1.5 Consolas, "Cascadia Mono", Menlo, monospace;
+}
+.ask { display: flex; gap: 8px; padding: 0 12px 12px; }
+.ask input { flex: 1; min-width: 0; min-height: 40px; padding: 8px; border: 0; border-radius: 4px; font: 15px Consolas, "Cascadia Mono", Menlo, monospace; }
+footer { margin-top: 24px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Corso: Due Intelligenze? Un laboratorio per pensare</h1>
+  <p class="lesson">🧙‍♂️ 1A LEZIONE: Il cerchio della magia digitale</p>
+  <p id="status" role="status">Sto preparando Python nel browser…</p>
+
+  <section class="snippet" style="--accent: var(--green); --tint: var(--green-bg)">
+    <span class="tag">Sequenza di comandi</span>
+    <h2>Cos'è un programma?</h2>
+    <p>Una serie di istruzioni di cose da fare!</p>
+    <textarea hidden data-source>import time
+
+print("🧙‍♂️ Benvenuto nel cerchio della magia digitale!")
+input("Pensa un numero da 1 a 10, ma NON dirmelo! Clicca su CONTINUA...")
+print("Moltiplicalo per 2... fatto?")
+time.sleep(5)
+print("Ora aggiungi 10 al risultato... fatto?")
+time.sleep(5)
+print("Dividi tutto a metà... fatto?")
+time.sleep(5)
+print("Ora togli il numero che avevi pensato all'inizio... 🔮")
+time.sleep(5)
+print("Il tuo risultato finale è... 5! ✨")</textarea>
+  </section>
+
+  <section class="snippet" style="--accent: var(--blue); --tint: var(--blue-bg)">
+    <span class="tag">Struttura IF ELSE</span>
+    <h2>E se non so sempre cosa fare?</h2>
+    <p>A un certo punto dovrò prendere qualche decisione, no?</p>
+    <textarea hidden data-source>print("🛸 Portale Intergalattico: Test della Personalità!")
+print ("Trovi un uovo di drago abbandonato. Cosa fai?")
+print ("A: Lo curi / B: Lo vendi")
+risposta = input()
+
+
+if risposta == "A" or risposta == "a":
+    print("💖 Sei un Eroe! Il drago nascerà e proteggerà il tuo regno.")
+elif risposta == "B" or risposta == "b":
+    print("💰 Sei un Furfante! Diventerai ricco, ma un giorno il drago cercherà vendetta...")
+else:
+    print("🌀 Risposta non valida! Il portale è esploso per la confusione. Esegui di nuovo!")</textarea>
+  </section>
+
+  <section class="snippet" style="--accent: var(--orange); --tint: var(--orange-bg)">
+    <span class="tag">Ciclo WHILE</span>
+    <h2>Ok... ma se voglio fare delle attività fino al verificarsi di una specifica condizione?</h2>
+    <textarea hidden data-source>import random
+
+numero_segreto = random.randint(1, 10)
+print("🎲 Ho pensato a un numero da 1 a 10. Indovinalo!")
+
+risposta = 0
+while risposta != numero_segreto:
+    risposta = int(input("Qual è il tuo tentativo? "))
+
+    if risposta != numero_segreto:
+        print("❌ Sbagliato! Riprova...")
+
+print("🎉 Bravissimo! Hai indovinato il numero segreto! ✨")</textarea>
+  </section>
+
+  <footer>Python gira dentro il browser: non si installa nulla e il codice non viene inviato a nessuno. Serve internet all'apertura della pagina.</footer>
+</main>
+
+<script type="text/x-python" id="runtime">
+import ast
+import sys
+import time
+import traceback
+
+import course_bridge
+
+_last_yield = 0.0
+
+
+async def _sleep_ms(ms):
+    await course_bridge.wait(ms)
+    if course_bridge.stopped():
+        raise KeyboardInterrupt
+
+
+async def _py_input(prompt=""):
+    print(prompt, end="", flush=True)
+    value = await course_bridge.ask()
+    if course_bridge.stopped():
+        raise KeyboardInterrupt
+    return value
+
+
+async def _py_wait_key(prompt=""):
+    print(prompt, end="", flush=True)
+    await course_bridge.wait_key()
+    if course_bridge.stopped():
+        raise KeyboardInterrupt
+    return ""
+
+
+async def _py_sleep(seconds):
+    await _sleep_ms(seconds * 1000)
+
+
+async def _py_tick():
+    global _last_yield
+    now = time.monotonic()
+    if now - _last_yield > 0.05:
+        _last_yield = now
+        await _sleep_ms(0)
+
+
+class Asyncify(ast.NodeTransformer):
+    # The browser's main thread cannot block, so input/sleep/loops become awaits.
+    # Nested scopes are left alone: there input falls back to window.prompt.
+    def _skip(self, node):
+        return node
+
+    visit_FunctionDef = visit_AsyncFunctionDef = visit_Lambda = visit_ClassDef = _skip
+    visit_ListComp = visit_SetComp = visit_DictComp = visit_GeneratorExp = _skip
+
+    def visit_Expr(self, node):
+        # A discarded input() is only a pause: wait for a key, so nobody is led to type an answer.
+        call = node.value
+        if isinstance(call, ast.Call) and isinstance(call.func, ast.Name) and call.func.id == "input":
+            self.generic_visit(call)
+            call.func = ast.Name("_py_wait_key", ast.Load())
+            node.value = ast.Await(call)
+            return node
+        return self.generic_visit(node)
+
+    def visit_Call(self, node):
+        self.generic_visit(node)
+        func = node.func
+        if isinstance(func, ast.Name) and func.id == "input":
+            node.func = ast.Name("_py_input", ast.Load())
+            return ast.Await(node)
+        if (
+            isinstance(func, ast.Attribute)
+            and func.attr == "sleep"
+            and isinstance(func.value, ast.Name)
+            and func.value.id == "time"
+        ):
+            node.func = ast.Name("_py_sleep", ast.Load())
+            return ast.Await(node)
+        return node
+
+    def _visit_loop(self, node):
+        self.generic_visit(node)
+        tick = ast.Call(ast.Name("_py_tick", ast.Load()), [], [])
+        node.body.insert(0, ast.Expr(ast.Await(tick)))
+        return node
+
+    visit_While = visit_For = _visit_loop
+
+
+def _error_line(error):
+    if isinstance(error, SyntaxError):
+        return error.lineno
+    frames = [f for f in traceback.extract_tb(error.__traceback__) if f.filename == "snippet"]
+    return frames[-1].lineno if frames else None
+
+
+async def run_snippet(source):
+    try:
+        tree = ast.fix_missing_locations(Asyncify().visit(ast.parse(source, "snippet")))
+        code = compile(tree, "snippet", "exec", flags=ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)
+        scope = {
+            "__name__": "__main__",
+            "_py_input": _py_input,
+            "_py_wait_key": _py_wait_key,
+            "_py_sleep": _py_sleep,
+            "_py_tick": _py_tick,
+        }
+        pending = eval(code, scope)
+        if pending is not None:
+            await pending
+    except KeyboardInterrupt:
+        print("\nProgramma fermato.")
+    except SystemExit:
+        pass
+    except Exception as error:
+        line = _error_line(error)
+        where = f" alla riga {line}" if line else ""
+        print(f"\nErrore{where}: {type(error).__name__}: {error}")
+    sys.stdout.flush()
+</script>
+
+<script>
+const ICONS = {
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>',
+  stop: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>',
+  eye: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>',
+  reset: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>',
+};
+const MAX_OUTPUT_CHARS = 50000;
+
+let runSnippet = null;
+let active = null;
+let pending = null;
+let stopped = false;
+const decoder = new TextDecoder();
+const cards = [];
+
+function settle(value) {
+  const current = pending;
+  pending = null;
+  if (current) {
+    clearTimeout(current.timer);
+    current.resolve(value);
+  }
+}
+
+function write(text) {
+  if (!active) return;
+  const out = active.output;
+  const next = out.textContent + text;
+  out.textContent = next.length > MAX_OUTPUT_CHARS ? next.slice(-MAX_OUTPUT_CHARS) : next;
+  out.scrollTop = out.scrollHeight;
+}
+
+const bridge = {
+  wait: (ms) => new Promise((resolve) => {
+    pending = { resolve, timer: setTimeout(() => settle(), ms) };
+  }),
+  ask: () => new Promise((resolve) => {
+    pending = { resolve };
+    active.askForm.hidden = false;
+    active.askInput.value = '';
+    active.askInput.focus();
+  }),
+  wait_key: () => new Promise((resolve) => {
+    pending = { resolve };
+    active.keyRow.hidden = false;
+  }),
+  stopped: () => stopped,
+};
+
+function finishKeyWait() {
+  active.keyRow.hidden = true;
+  write('\n');
+  settle();
+}
+
+const NON_ANSWER_KEYS = ['Shift', 'Control', 'Alt', 'AltGraph', 'Meta', 'Tab', 'CapsLock'];
+
+document.addEventListener('keydown', (event) => {
+  if (!active || active.keyRow.hidden || event.repeat || NON_ANSWER_KEYS.includes(event.key)) return;
+  if (event.target.closest('button, input, textarea')) return;
+  event.preventDefault();
+  finishKeyWait();
+});
+
+function refreshButtons() {
+  for (const card of cards) {
+    card.run.disabled = !runSnippet || (active !== null && active !== card);
+    card.run.hidden = active === card;
+    card.stop.hidden = active !== card;
+  }
+}
+
+async function run(card) {
+  if (!runSnippet || active) return;
+  active = card;
+  stopped = false;
+  card.console.hidden = false;
+  card.output.textContent = '';
+  refreshButtons();
+  try {
+    await runSnippet(card.source.value);
+  } catch (error) {
+    write(`\nErrore: ${error.message}`);
+  } finally {
+    card.askForm.hidden = true;
+    card.keyRow.hidden = true;
+    active = null;
+    refreshButtons();
+  }
+}
+
+function fitSource(source) {
+  source.rows = source.value.split('\n').length + 1;
+}
+
+function button(html, className = '') {
+  const element = document.createElement('button');
+  element.type = 'button';
+  element.className = className;
+  element.innerHTML = html;
+  return element;
+}
+
+function buildCard(section, number) {
+  const source = section.querySelector('[data-source]');
+  source.removeAttribute('hidden');
+  source.spellcheck = false;
+  source.setAttribute('aria-label', `Codice dello snippet ${number}`);
+
+  const code = document.createElement('div');
+  code.className = 'code';
+  code.hidden = true;
+  source.replaceWith(code);
+  const hint = document.createElement('p');
+  hint.className = 'hint';
+  hint.textContent = 'Puoi modificare il codice e rieseguirlo.';
+  code.append(source, hint);
+  fitSource(source);
+
+  const toggleLabel = (open) => open
+    ? `Nascondi Codice Snippet ${number}`
+    : `Apri e scopri il Codice dello Snippet ${number}`;
+  const run_ = button(`${ICONS.play}Esegui`, 'primary');
+  const stop = button(`${ICONS.stop}Ferma`, 'primary');
+  const toggle = button(`${ICONS.eye}<span>${toggleLabel(false)}</span>`);
+  const reset = button(`${ICONS.reset}Ripristina`);
+  stop.hidden = true;
+  reset.hidden = true;
+  toggle.setAttribute('aria-expanded', 'false');
+
+  const toolbar = document.createElement('div');
+  toolbar.className = 'toolbar';
+  toolbar.append(run_, stop, toggle, reset);
+
+  const consoleBox = document.createElement('div');
+  consoleBox.className = 'console';
+  consoleBox.hidden = true;
+  consoleBox.innerHTML = `
+    <pre aria-live="polite"></pre>
+    <form class="ask" hidden>
+      <input type="text" autocomplete="off" aria-label="La tua risposta">
+      <button type="submit">Invio</button>
+    </form>
+    <div class="ask" data-key hidden><button type="button">Continua</button></div>`;
+  section.append(toolbar, code, consoleBox);
+
+  const card = {
+    source, run: run_, stop, console: consoleBox,
+    output: consoleBox.querySelector('pre'),
+    askForm: consoleBox.querySelector('form'),
+    askInput: consoleBox.querySelector('input'),
+    keyRow: consoleBox.querySelector('[data-key]'),
+  };
+
+  run_.addEventListener('click', () => run(card));
+  stop.addEventListener('click', () => { stopped = true; settle(null); });
+  toggle.addEventListener('click', () => {
+    code.hidden = !code.hidden;
+    toggle.setAttribute('aria-expanded', String(!code.hidden));
+    toggle.querySelector('span').textContent = toggleLabel(!code.hidden);
+    reset.hidden = code.hidden;
+  });
+  reset.addEventListener('click', () => {
+    source.value = source.defaultValue;
+    fitSource(source);
+  });
+  source.addEventListener('input', () => fitSource(source));
+  source.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab' || event.shiftKey) return;
+    event.preventDefault();
+    source.setRangeText('    ', source.selectionStart, source.selectionEnd, 'end');
+  });
+  card.keyRow.querySelector('button').addEventListener('click', finishKeyWait);
+  card.askForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const value = card.askInput.value;
+    card.askForm.hidden = true;
+    write(`${value}\n`);
+    settle(value);
+  });
+  return card;
+}
+
+function showLoadError() {
+  const status = document.getElementById('status');
+  status.className = 'error';
+  status.textContent = 'Non riesco a preparare Python. Controlla la connessione a internet e ricarica la pagina.';
+}
+
+async function start() {
+  try {
+    const pyodide = await loadPyodide();
+    const sink = { write(bytes) { write(decoder.decode(bytes, { stream: true })); return bytes.length; } };
+    pyodide.setStdout(sink);
+    pyodide.setStderr(sink);
+    pyodide.registerJsModule('course_bridge', bridge);
+    pyodide.runPython(document.getElementById('runtime').textContent);
+    runSnippet = pyodide.globals.get('run_snippet');
+    document.getElementById('status').hidden = true;
+    refreshButtons();
+  } catch (error) {
+    console.error(error);
+    showLoadError();
+  }
+}
+
+document.querySelectorAll('.snippet').forEach((section, index) => cards.push(buildCard(section, index + 1)));
+refreshButtons();
+</script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js" onload="start()" onerror="showLoadError()"></script>
+</body>
+</html>
