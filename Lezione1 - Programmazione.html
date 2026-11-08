@@ -161,7 +161,11 @@ print("🎲 Ho pensato a un numero da 1 a 10. Indovinalo!")
 
 risposta = 0
 while risposta != numero_segreto:
-    risposta = int(input("Qual è il tuo tentativo? "))
+    testo = input("Qual è il tuo tentativo? ")
+    if not testo.isdigit():
+        print("⚠️ Scrivi un numero, per esempio 7!")
+        continue
+    risposta = int(testo)
 
     if risposta != numero_segreto:
         print("❌ Sbagliato! Riprova...")
