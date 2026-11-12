@@ -20,7 +20,7 @@
 :root {
   --blue: #2340C8; --coral: #FF5A4E; --coral-text: #C92A20; --overprint: #2A1860;
   --paper: #F2F4F7; --text: #2A1860; --muted: #55516C; --grid: #C9CDD8; --white: #FFFFFF;
-  --coral-tint: #FFF1EF;
+  --coral-tint: #FFF1EF; --soft-blue: #CFD6F4; --dot-blue: #8E9DE4;
   --heading: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --mono: Consolas, "Cascadia Mono", Menlo, monospace;
@@ -29,18 +29,18 @@
 body { margin: 0; background: var(--paper); color: var(--text); font: 17px/1.5 var(--body); }
 ::selection { background: var(--coral); color: var(--overprint); }
 .masthead {
-  position: relative; padding: 36px 16px 64px; background: var(--blue); color: var(--white); overflow: hidden;
+  position: relative; padding: 36px 16px 64px; background: var(--soft-blue); color: var(--overprint); overflow: hidden;
 }
 .masthead::after {
   content: ""; position: absolute; inset: auto 0 0 0; height: 56px;
-  background: radial-gradient(var(--overprint) 34%, transparent 36%) 0 0 / 14px 14px;
+  background: radial-gradient(var(--dot-blue) 34%, transparent 36%) 0 0 / 14px 14px;
   -webkit-mask-image: linear-gradient(transparent, #000); mask-image: linear-gradient(transparent, #000);
 }
 .masthead-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 24px; max-width: 860px; margin: 0 auto; }
 .masthead-inner > div { flex: 1; min-width: 0; }
 .masthead img { width: 92px; height: auto; flex: none; }
 main { max-width: 860px; margin: 0 auto; padding: 0 16px 48px; }
-h1 { margin: 0 0 10px; font: 700 17px/1.3 var(--body); color: #DCE2FF; }
+h1 { margin: 0 0 10px; font: 700 17px/1.3 var(--body); color: var(--blue); }
 h2 { margin: 0; font: 700 26px/1.15 var(--heading); letter-spacing: -.01em; }
 .lesson { margin: 0; font: 700 clamp(28px, 5vw, 44px)/1.08 var(--heading); letter-spacing: -.02em; }
 p { margin: 8px 0 0; }
@@ -66,7 +66,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px
 button:disabled { opacity: .45; cursor: not-allowed; }
 button.primary { background: var(--overprint); color: var(--white); }
 button.primary:hover:not(:disabled) { background: var(--blue); border-color: var(--blue); }
-.code[hidden], .console[hidden], .ask[hidden], button[hidden] { display: none; }
+.snippet[hidden], .code[hidden], .console[hidden], .ask[hidden], button[hidden] { display: none; }
 .code { margin-top: 14px; }
 textarea {
   display: block; width: 100%; padding: 14px; border: 0; border-left: 0; resize: vertical;
@@ -75,11 +75,11 @@ textarea {
   white-space: pre; overflow-x: auto; font: 15px/1.55 var(--mono);
 }
 .hint { margin-top: 6px; color: var(--coral-text); font-size: 14px; }
-.console { margin-top: 14px; background: var(--blue); color: var(--white); }
+.console { margin-top: 14px; background: var(--soft-blue); color: var(--overprint); }
 .console pre {
   margin: 0; padding: 14px 16px; min-height: 52px; max-height: 360px; overflow: auto;
   white-space: pre-wrap; overflow-wrap: anywhere; font: 16px/1.55 var(--mono);
-  scrollbar-color: #8FA0F0 var(--blue);
+  scrollbar-color: var(--dot-blue) var(--soft-blue);
 }
 .ask { display: flex; gap: 8px; padding: 0 14px 14px; }
 .ask input {
@@ -87,7 +87,13 @@ textarea {
   background: var(--coral-tint); color: var(--overprint); caret-color: var(--coral-text);
   box-shadow: inset 0 0 0 2px var(--coral); font: 16px var(--mono);
 }
-.ask button { border-color: var(--white); }
+.next {
+  display: flex; width: fit-content; margin: 18px 8px 0 auto; padding: 4px 8px; border: 0; background: none;
+  color: var(--coral-text); font: 400 32px/1 "Kalam", cursive; transform: rotate(-4deg);
+  transition: color .15s ease-out, transform .15s ease-out;
+}
+.next:hover:not(:disabled) { background: none; color: var(--overprint); transform: rotate(-4deg) translateX(4px); }
+.next svg { width: 72px; height: 44px; stroke-width: 2.6; }
 footer { margin-top: 28px; color: var(--muted); font-size: 14px; }
 @media (max-width: 520px) {
   .masthead img { width: 64px; }
@@ -504,7 +510,18 @@ async function start() {
   }
 }
 
-document.querySelectorAll('.snippet').forEach((section, index) => cards.push(buildCard(section, index + 1)));
+const sections = [...document.querySelectorAll('.snippet')];
+sections.forEach((section, index) => cards.push(buildCard(section, index + 1)));
+sections.slice(1).forEach((section) => { section.hidden = true; });
+const nextButton = button('NEXT<svg viewBox="0 0 72 44" aria-hidden="true"><path d="M4 30c9-9 20-15 33-14 9 1 16 4 26 1"/><path d="M53 8c4 4 8 7 12 9-5 3-9 7-12 12"/></svg>', 'next');
+nextButton.setAttribute('aria-label', 'Mostra lo snippet successivo');
+sections[sections.length - 1].after(nextButton);
+nextButton.addEventListener('click', () => {
+  const section = sections.find((s) => s.hidden);
+  section.hidden = false;
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!sections.some((s) => s.hidden)) nextButton.remove();
+});
 refreshButtons();
 </script>
 <script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js" onload="start()" onerror="showLoadError()"></script>
