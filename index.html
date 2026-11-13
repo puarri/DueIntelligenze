@@ -19,6 +19,7 @@
 :root {
   --blue: #2340C8; --coral: #FF5A4E; --coral-text: #C92A20; --overprint: #2A1860;
   --paper: #F2F4F7; --text: #2A1860; --muted: #55516C; --white: #FFFFFF;
+  --soft-blue: #CFD6F4; --dot-blue: #8E9DE4;
   --heading: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --hand: "Kalam", "Segoe UI", system-ui, sans-serif;
@@ -37,7 +38,7 @@ a { color: inherit; }
 }
 .hero::after {
   content: ""; position: absolute; inset: auto 0 0 0; height: 140px; pointer-events: none;
-  background: radial-gradient(var(--blue) 34%, transparent 36%) 0 0 / 16px 16px;
+  background: radial-gradient(var(--dot-blue) 34%, transparent 36%) 0 0 / 16px 16px;
   -webkit-mask-image: linear-gradient(transparent, #000); mask-image: linear-gradient(transparent, #000);
   opacity: .9;
 }
@@ -60,32 +61,32 @@ h1 .q { color: var(--coral); }
 .legend li { display: flex; align-items: center; gap: 10px; }
 .legend i { display: inline-block; width: 46px; height: 16px; }
 .legend .human { background: var(--coral); border-radius: 9px 4px 11px 3px; }
-.legend .machine { background: radial-gradient(var(--blue) 38%, transparent 42%) 0 0 / 8px 8px; }
+.legend .machine { background: radial-gradient(var(--dot-blue) 38%, transparent 42%) 0 0 / 8px 8px; }
 .mark { position: relative; justify-self: center; width: min(100%, 560px); height: auto; }
 
-.lessons { position: relative; padding: 64px var(--gutter) 96px; background: var(--overprint); color: var(--white); overflow: hidden; }
+.lessons { position: relative; padding: 64px var(--gutter) 96px; background: var(--soft-blue); color: var(--overprint); overflow: hidden; }
 .lessons::before {
   content: ""; position: absolute; inset: 0 0 0 45%; pointer-events: none;
   background: radial-gradient(var(--coral) 34%, transparent 36%) 0 0 / 18px 18px;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 85%); mask-image: linear-gradient(90deg, transparent, #000 85%);
-  opacity: .55;
+  opacity: .35;
 }
 .lessons > * { position: relative; }
 .lessons h2 { margin: 0; font: 700 clamp(36px, 4.6vw, 64px)/1 var(--heading); letter-spacing: -.02em; }
-.lessons .note { margin: 14px 0 0; font: 400 26px/1.2 var(--hand); color: var(--coral); }
+.lessons .note { margin: 14px 0 0; font: 400 26px/1.2 var(--hand); color: var(--coral-text); }
 .lesson {
   display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: clamp(16px, 3vw, 48px);
   max-width: 1080px; margin-top: 40px; padding: clamp(20px, 3vw, 40px);
-  background: var(--paper); color: var(--text); text-decoration: none;
+  background: var(--white); color: var(--text); text-decoration: none;
   transition: transform .25s cubic-bezier(.16, 1, .3, 1), box-shadow .25s ease-out;
 }
-.lesson:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0, 0, 0, .28); }
+.lesson:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(42, 24, 96, .18); }
 .lesson .numeral { width: clamp(84px, 9vw, 130px); height: auto; }
 .lesson .label { margin: 0; font-size: 17px; font-weight: 700; color: var(--coral-text); }
 .lesson strong { display: block; margin-top: 4px; font: 700 clamp(30px, 3.4vw, 46px)/1.05 var(--heading); color: var(--blue); }
 .lesson p.text { margin: 10px 0 0; font-size: 20px; }
 .lesson .drawing { width: clamp(84px, 9vw, 140px); height: auto; }
-footer { padding: 28px var(--gutter); background: var(--overprint); color: #C9C6DD; font-size: 15px; border-top: 1px solid rgba(255, 255, 255, .15); }
+footer { padding: 28px var(--gutter); background: var(--soft-blue); color: var(--muted); font-size: 15px; border-top: 1px solid var(--dot-blue); }
 
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; align-content: start; min-height: 0; padding-top: 24px; }
@@ -116,7 +117,7 @@ footer { padding: 28px var(--gutter); background: var(--overprint); color: #C9C6
       <li><i class="machine" aria-hidden="true"></i>la macchina</li>
     </ul>
   </div>
-  <img class="mark" data-asset="mark.svg" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MjAgMTA2MCIgd2lkdGg9IjcyMCIgaGVpZ2h0PSIxMDYwIj4KICA8ZGVmcz4KICAgIDxwYXR0ZXJuIGlkPSJkb3RzIiB3aWR0aD0iMjYiIGhlaWdodD0iMjYiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPgogICAgICA8Y2lyY2xlIGN4PSIxMyIgY3k9IjEzIiByPSI5IiBmaWxsPSIjMjM0MEM4Ii8+CiAgICA8L3BhdHRlcm4+CiAgICA8ZmlsdGVyIGlkPSJyb3VnaCIgeD0iLTEwJSIgeT0iLTEwJSIgd2lkdGg9IjEyMCUiIGhlaWdodD0iMTIwJSI+CiAgICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIuMDMiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjQiLz4KICAgICAgPGZlRGlzcGxhY2VtZW50TWFwIGluPSJTb3VyY2VHcmFwaGljIiBzY2FsZT0iMTQiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8ZyBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6bXVsdGlwbHkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwIDcwKSI+CiAgICA8cGF0aCBkPSJNMTEwIDMwMEMxMjAgMTEwIDMwMCA0MCA0NDAgNzBjMTUwIDMwIDIyMCAxNTAgMTgwIDI4MC0zMCAxMDAtMTMwIDE0MC0xOTAgMjEwLTMwIDQwLTQwIDkwLTQwIDE1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2RvdHMpIiBzdHJva2Utd2lkdGg9IjE1MCIvPgogICAgPGNpcmNsZSBjeD0iMzkwIiBjeT0iODQwIiByPSI4OCIgZmlsbD0idXJsKCNkb3RzKSIvPgogIDwvZz4KICA8ZyBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6bXVsdGlwbHkiIGZpbHRlcj0idXJsKCNyb3VnaCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiA5NikiPgogICAgPHBhdGggZD0iTTExMCAzMDBDMTIwIDExMCAzMDAgNDAgNDQwIDcwYzE1MCAzMCAyMjAgMTUwIDE4MCAyODAtMzAgMTAwLTEzMCAxNDAtMTkwIDIxMC0zMCA0MC00MCA5MC00MCAxNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGNUE0RSIgc3Ryb2tlLXdpZHRoPSIxMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTMyOCA4MTJjLTIwIDQwIDEwIDkwIDYwIDkyIDU2IDIgOTAtNDAgNzYtODgtMTQtNDYtMTEyLTUyLTEzNi00eiIgZmlsbD0iI0ZGNUE0RSIvPgogIDwvZz4KPC9zdmc+Cg==" alt="" width="720" height="1060">
+  <img class="mark" data-asset="mark.svg" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MjAgMTA2MCIgd2lkdGg9IjcyMCIgaGVpZ2h0PSIxMDYwIj4KICA8ZGVmcz4KICAgIDxwYXR0ZXJuIGlkPSJkb3RzIiB3aWR0aD0iMjYiIGhlaWdodD0iMjYiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPgogICAgICA8Y2lyY2xlIGN4PSIxMyIgY3k9IjEzIiByPSI5IiBmaWxsPSIjOEU5REU0Ii8+CiAgICA8L3BhdHRlcm4+CiAgICA8ZmlsdGVyIGlkPSJyb3VnaCIgeD0iLTEwJSIgeT0iLTEwJSIgd2lkdGg9IjEyMCUiIGhlaWdodD0iMTIwJSI+CiAgICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIuMDMiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjQiLz4KICAgICAgPGZlRGlzcGxhY2VtZW50TWFwIGluPSJTb3VyY2VHcmFwaGljIiBzY2FsZT0iMTQiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8ZyBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6bXVsdGlwbHkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwIDcwKSI+CiAgICA8cGF0aCBkPSJNMTEwIDMwMEMxMjAgMTEwIDMwMCA0MCA0NDAgNzBjMTUwIDMwIDIyMCAxNTAgMTgwIDI4MC0zMCAxMDAtMTMwIDE0MC0xOTAgMjEwLTMwIDQwLTQwIDkwLTQwIDE1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2RvdHMpIiBzdHJva2Utd2lkdGg9IjE1MCIvPgogICAgPGNpcmNsZSBjeD0iMzkwIiBjeT0iODQwIiByPSI4OCIgZmlsbD0idXJsKCNkb3RzKSIvPgogIDwvZz4KICA8ZyBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6bXVsdGlwbHkiIGZpbHRlcj0idXJsKCNyb3VnaCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNiA5NikiPgogICAgPHBhdGggZD0iTTExMCAzMDBDMTIwIDExMCAzMDAgNDAgNDQwIDcwYzE1MCAzMCAyMjAgMTUwIDE4MCAyODAtMzAgMTAwLTEzMCAxNDAtMTkwIDIxMC0zMCA0MC00MCA5MC00MCAxNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGNUE0RSIgc3Ryb2tlLXdpZHRoPSIxMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTMyOCA4MTJjLTIwIDQwIDEwIDkwIDYwIDkyIDU2IDIgOTAtNDAgNzYtODgtMTQtNDYtMTEyLTUyLTEzNi00eiIgZmlsbD0iI0ZGNUE0RSIvPgogIDwvZz4KPC9zdmc+Cg==" alt="" width="720" height="1060">
 </header>
 
 <main class="lessons" id="attivita">
